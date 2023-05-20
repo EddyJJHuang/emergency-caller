@@ -13,7 +13,7 @@ struct emergency_callerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SizingView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

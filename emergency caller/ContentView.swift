@@ -5,84 +5,75 @@
 //  Created by 黄家骏 on 5/18/23.
 //
 
+
 import SwiftUI
-import CoreData
+import DynamicColor
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+struct SizingView: View {
+    @State private var showPersonalInfo = false // State variable to track whether to show the personal info view
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            VStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color(DynamicColor.systemRed))
+                        .frame(maxWidth: 200, maxHeight: 150)
+                    VStack {
+                        Text("SOS")
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .onTapGesture {
+                    // Handle tap on SOS stack here
+                    // You can add your logic or navigation code if needed
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color(DynamicColor.green))
+                        .frame(maxWidth: 200, maxHeight: 150)
+                    VStack {
+                        Text("Personal Information")
                     }
                 }
+                .onTapGesture {
+                    // Handle tap on Personal Information stack here
+                    showPersonalInfo = true // Set the state variable to true to trigger navigation
+                }
             }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            .font(.headline)
+            .navigationBarTitle("Main Menu")
+            .sheet(isPresented: $showPersonalInfo) {
+                PersonalInfoView() // Present the PersonalInfoView as a sheet when showPersonalInfo is true
             }
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .long
-    formatter.timeStyle = .long
-    return formatter
-}()
+struct PersonalInfoView: View {
+    @Environment(\.presentationMode) private var presentationMode // Environment variable to dismiss the sheet
 
-struct ContentView_Previews: PreviewProvider {
+    var body: some View {
+        VStack {
+            Text("Enter Personal Information")
+                .font(.headline)
+                .padding()
+            
+            // Add your personal information input fields here
+            
+            Button("Save") {
+                // Handle the save action here
+                
+                presentationMode.wrappedValue.dismiss() // Dismiss the sheet
+            }
+            .padding()
+        }
+        .navigationBarTitle("Personal Information")
+    }
+}
+
+struct Previews_SizingView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        SizingView()
     }
 }

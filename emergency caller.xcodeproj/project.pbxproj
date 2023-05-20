@@ -16,6 +16,7 @@
 		534E62012A16A26900C1AD3E /* emergency_callerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E62002A16A26900C1AD3E /* emergency_callerTests.swift */; };
 		534E620B2A16A26900C1AD3E /* emergency_callerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E620A2A16A26900C1AD3E /* emergency_callerUITests.swift */; };
 		534E620D2A16A26900C1AD3E /* emergency_callerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534E620C2A16A26900C1AD3E /* emergency_callerUITestsLaunchTests.swift */; };
+		ADB7E2122A1959E900D77A79 /* DynamicColor in Frameworks */ = {isa = PBXBuildFile; productRef = ADB7E2112A1959E900D77A79 /* DynamicColor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB7E2122A1959E900D77A79 /* DynamicColor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +151,9 @@
 			dependencies = (
 			);
 			name = "emergency caller";
+			packageProductDependencies = (
+				ADB7E2112A1959E900D77A79 /* DynamicColor */,
+			);
 			productName = "emergency caller";
 			productReference = 534E61E72A16A26800C1AD3E /* emergency caller.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +226,9 @@
 				Base,
 			);
 			mainGroup = 534E61DE2A16A26800C1AD3E;
+			packageReferences = (
+				ADB7E2102A1959E900D77A79 /* XCRemoteSwiftPackageReference "DynamicColor" */,
+			);
 			productRefGroup = 534E61E82A16A26800C1AD3E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -585,6 +593,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADB7E2102A1959E900D77A79 /* XCRemoteSwiftPackageReference "DynamicColor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yannickl/DynamicColor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADB7E2112A1959E900D77A79 /* DynamicColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADB7E2102A1959E900D77A79 /* XCRemoteSwiftPackageReference "DynamicColor" */;
+			productName = DynamicColor;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		534E61F52A16A26900C1AD3E /* emergency_caller.xcdatamodeld */ = {
