@@ -68,7 +68,7 @@ struct PersonalInfoView: View {
             }
             .padding()
         }
-        .navigationBarTitle("Personal Information")
+        .navigationBarTitle("Personal")
     }
 }
 
